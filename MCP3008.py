@@ -28,6 +28,8 @@ def printSettings(obj):
 #Returns a correctly configured SPI device
 def initADC(miso, mosi, sclk, cs):
 	spiDev  = onionSpi.OnionSpi(1, 32766)
+	#objects members
+	#----------------------------------------
 	spiDev.delay = 10
 	spiDev.mode = 0
 	spiDev.sck = sclk
@@ -35,9 +37,10 @@ def initADC(miso, mosi, sclk, cs):
 	spiDev.miso = miso
 	spiDev.cs = cs
 	spiDev.speed = 1350000 # for 3.3V supply
-
+	#----------------------------------------
 	spiDev.setVerbosity(0)
 	# check the device
+	#return 0 if the device adapter is alredy mapped, 1 if the device adapter is NOT mapped
 	print 'Checking if device exists...'
 	ret = spiDev.checkDevice()
 	print '   Device does not exist: %d'%(ret)
@@ -106,13 +109,17 @@ def SPIxADC(spiDev, channel, differential):
 spi = initADC(9,8,7,6)
 printSettings(spi)
 
-for i in range(30):
+try:
+	for i in range(30):
 
-	adcValues = []
-	for chan in range(0, 8):
-		adcValues.append(readADC(spi, chan))
+		adcValues = []
+		for chan in range(0, 8):
+			adcValues.append(readADC(spi, chan))
 
-	line = ','.join(str(v) for v in adcValues)		
-	print(line)
+		line = ','.join(str(v) for v in adcValues)		
+		print(line)
 	
-	time.sleep(0.3)
+		time.sleep(0.3)
+		
+except KeyboardInterrupt:
+	print("Operation cancelled")
