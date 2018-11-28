@@ -110,14 +110,16 @@ spi = initADC(9,8,7,6)
 printSettings(spi)
 
 try:
-	for i in range(30):
+	#for i in range(30):
 
 		adcValues = []
-		for chan in range(0, 8):
-			adcValues.append(readADC(spi, chan))
+		adcValues.append(readADC(spi, 0))
+		print(adcValues)
+		#for chan in range(0, 8):
+		#	adcValues.append(readADC(spi, chan))
 
-		line = ','.join(str(v) for v in adcValues)		
-		print(line)
+		#line = ','.join(str(v) for v in adcValues)		
+		#print(line)
 	
 		time.sleep(0.3)
 		
