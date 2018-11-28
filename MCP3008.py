@@ -106,7 +106,7 @@ def SPIxADC(spiDev, channel, differential):
 	
 # MAIN PROGRAM
 
-spi = initADC(9,8,7,6)
+spi = initADC(12,8,7,6)
 printSettings(spi)
 
 try:
