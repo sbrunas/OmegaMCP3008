@@ -98,7 +98,9 @@ def SPIxADC(spiDev, channel, differential):
 	b0 = spiResp[0]
 	b1 = spiResp[1]
 	b2 = spiResp[2]
-	
+	print(spiResp[0])
+	print(spiResp[1])
+	print(spiResp[2])
 	#print(b0,b1,b2)
 	#reconstruct 10-bit ADC value
 	return 0x3FF & ((b0 & 0x01) << 9 | (b1 & 0xFF) << 1 | (b2 & 0x80) >> 7 )
